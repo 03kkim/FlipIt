@@ -54,6 +54,12 @@ class Board:
         for group in ls:
             print(group)
 
+    def print_board(self, style):
+        if (style == "grid"):
+            self.print_grid()
+        if (style == "line"):
+            print(self.view_board)
+
     # flips index from 1 --> 0 or 0 --> 1
     def flip(self, id):
         if (self.id_states[id] == 0):
@@ -72,8 +78,13 @@ class Board:
 
         self.view_board = self.id_states
 
+    # highlights the selected square, prints the board in the given style, and removes the highlight after printing
+    def highlight(self, id, style="grid"):
+        ls_on = []
+        for num in self.ids:
+            if (self.id_states[num] == 1):
+                ls_on.append(num)
 
-    def highlight(self, id):
         related_ids = self.relationships[id][id]
         self.view_board.pop(id)
         self.view_board.insert(id, 2)
@@ -84,8 +95,12 @@ class Board:
         self.view_board.pop(related_ids[1])
         self.view_board.insert(related_ids[1], 3)
 
-    def unhighlight(self):
-        self.view_board = self.id_states
+
+        self.print_board(style)
+
+        self.clear_board()
+        for id in ls_on:
+            self.flip(id)
 
     def has_won(self):
         if not (0 in self.id_states):
