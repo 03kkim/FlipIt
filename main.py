@@ -32,6 +32,7 @@ while (board.has_won() == False):
 print("You win!")
 
 """
+
 [{0: [8, 13]}, {1: [5, 15]}, {2: [13, 1]}, {3: [2, 11]}, 
  {4: [12, 10]}, {5: [1, 12]}, {6: [15, 8]}, {7: [0, 9]}, 
  {8: [14, 3]}, {9: [6, 2]}, {10: [11, 6]}, {11: [9, 4]}, 
@@ -50,6 +51,7 @@ Notes:
 - One way to generate the relationships would be to randomly make a list of the numbers 0-15. Transfer each of these twice to a separate list.
 - To make 1 big loop, just remove the first element from that list, and move it to the end.
 - To make multiple loops, split the list in between two numbers and do the same process for the big loop. (Make sure the len(list)%4 == 0)
+- Loops must be greater than 3 units long
 """
 
 
