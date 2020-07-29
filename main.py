@@ -15,6 +15,7 @@ from board import Board
 # Sets up board
 board = Board()
 board.create_relationships()
+print(board.relationships)
 grid = board.return_grid()
 object_grid = []
 
