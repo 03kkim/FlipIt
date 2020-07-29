@@ -1,51 +1,131 @@
-from board import Board
-import os
+"""
+ Pygame base template for opening a window
 
-board = Board()
-board.create_relationships()
-print(board.relationships)
-turn = 0
-board.print_grid()
+ Sample Python/Pygame Programs
+ Simpson College Computer Science
+ http://programarcadegames.com/
+ http://simpson.edu/computer-science/
 
-while (board.has_won() == False):
-    # inp = input("Input 1 to highlight, 2 to switch, and 3 to clear the board\n")
-    # if (inp == "1"):
-    #     highlight_id = int(input("Where would you like to highlight?\n"))
-    #
-    #     board.highlight(highlight_id)
-    # else:
-    #     if (inp != "2" and inp != "3"):
-    #         print("Invalid input! Try again.")
-    #
-    #     elif (inp == "2"):
-    #         switch_id = int(input("Where would you like to switch?\n"))
-    #         board.switch(switch_id)
-    #
-    #     elif (inp == "3"):
-    #         board.clear_board()
-    switch_id = int(input(""))
-    board.switch(switch_id)
-    board.print_grid()
+ Explanation video: http://youtu.be/vRB_983kUMc
+"""
 
-    turn += 1
+import pygame
 
-print("You win!")
+# Define some colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+
+# Variables for individual squares
+width = 112
+height = 112
+margin = 10
+
+pygame.init()
+
+# Set the width and height of the screen [width, height]
+size = (498, 498)
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("My Game")
+
+# Loop until the user clicks the close button.
+done = False
+
+# Used to manage how fast the screen updates
+clock = pygame.time.Clock()
+
+# -------- Main Program Loop -----------
+while not done:
+    # --- Main event loop
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+
+    screen.fill(BLACK)
+
+    # --- Game logic should go here
+    for row in range(4):
+        for column in range(4):
+            pygame.draw.rect(screen, WHITE, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+
+    # --- Screen-clearing code goes here
+
+    # Here, we clear the screen to white. Don't put other drawing commands
+    # above this, or they will be erased with this command.
+
+    # If you want a background image, replace this clear with blit'ing the
+    # background image.
+
+
+    # --- Drawing code should go here
+
+    # --- Go ahead and update the screen with what we've drawn.
+    pygame.display.flip()
+
+    # --- Limit to 60 frames per second
+    clock.tick(60)
+
+# Close the window and quit.
+pygame.quit()
 
 
 
 
-# print(board.view_board)
-# print(str(board.id_states) + "\n")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from board import Board
+# import os
 #
-# board.switch(0)
-# print(board.view_board)
-# print(str(board.id_states) + "\n")
+# board = Board()
+# board.create_relationships()
+# print(board.relationships)
+# turn = 0
+# board.print_grid()
 #
-# print(board.view_board)
-# print(str(board.id_states) + "\n")
+# while (board.has_won() == False):
+#     # inp = input("Input 1 to highlight, 2 to switch, and 3 to clear the board\n")
+#     # if (inp == "1"):
+#     #     highlight_id = int(input("Where would you like to highlight?\n"))
+#     #
+#     #     board.highlight(highlight_id)
+#     # else:
+#     #     if (inp != "2" and inp != "3"):
+#     #         print("Invalid input! Try again.")
+#     #
+#     #     elif (inp == "2"):
+#     #         switch_id = int(input("Where would you like to switch?\n"))
+#     #         board.switch(switch_id)
+#     #
+#     #     elif (inp == "3"):
+#     #         board.clear_board()
+#     switch_id = int(input(""))
+#     board.switch(switch_id)
+#     board.print_grid()
 #
-# board.highlight(0, style="line")
-# print(str(board.id_states) + "\n")
+#     turn += 1
+#
+# print("You win!")
 
 
 
