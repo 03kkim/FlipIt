@@ -67,19 +67,33 @@ while not done:
             print("Click ", pos, "Grid coordinates: ", row, column)
             grid = board.return_grid()
 
-        # for square in grid:
-        #     if square.get_rect().collidepoint(pygame.mouse.get_pos()):
-        #         print("mouseover")
+        for square in object_grid:
+            if square.collidepoint(pygame.mouse.get_pos()):
+                pos = pygame.mouse.get_pos()
+                # Change the x/y screen coordinates to grid coordinates
+                column = pos[0] // (width + margin)
+                row = pos[1] // (width + margin)
+                # Set that location to one
+                board.highlight(board.coords_to_id(row, column))
+                print("Highlight ", pos, "Grid coordinates: ", row, column)
+                grid = board.return_grid()
+
 
 
     screen.fill(BLACK)
     # --- Game logic should go here
     for row in range(4):
+
         for column in range(4):
             color = GRAY
             if grid[row][column] == 1:
                 color = WHITE
-            pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+            rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+
+            # Adds to the object grid used to detect mouseovers
+            if len(object_grid) < 16:
+                object_grid.append(rect1)
+
             if board.is_highlighted[board.coords_to_id(row, column)] == 2:
                 pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
             if board.is_highlighted[board.coords_to_id(row, column)] == 3:
