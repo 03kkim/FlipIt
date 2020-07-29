@@ -113,6 +113,8 @@ class Board:
         self.is_highlighted.pop(related_ids[1])
         self.is_highlighted.insert(related_ids[1], 3)
 
+    def unhighlight(self):
+        self.is_highlighted = [0 for num in range(16)]
 
     def has_won(self):
         if not (0 in self.id_states):
