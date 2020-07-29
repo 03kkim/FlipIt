@@ -7,7 +7,6 @@ class Board:
     relationships = []
     view_board = [0 for num in range(16)]
 
-
     def front_to_back(self, list):
         list.pop(0)
         list.append(list[0])
@@ -103,28 +102,17 @@ class Board:
         self.view_board = self.id_states
 
     # highlights the selected square, prints the board in the given style, and removes the highlight after printing
-    def highlight(self, id, style="grid"):
-        ls_on = []
-        for num in self.ids:
-            if (self.id_states[num] == 1):
-                ls_on.append(num)
-
+    def highlight(self, id):
         related_ids = self.relationships[id][id]
-        self.view_board.pop(id)
-        self.view_board.insert(id, 2)
+        self.is_highlighted.pop(id)
+        self.is_highlighted.insert(id, 2)
 
-        self.view_board.pop(related_ids[0])
-        self.view_board.insert(related_ids[0], 3)
+        self.is_highlighted.pop(related_ids[0])
+        self.is_highlighted.insert(related_ids[0], 3)
 
-        self.view_board.pop(related_ids[1])
-        self.view_board.insert(related_ids[1], 3)
+        self.is_highlighted.pop(related_ids[1])
+        self.is_highlighted.insert(related_ids[1], 3)
 
-
-        self.print_board(style)
-
-        self.clear_board()
-        for id in ls_on:
-            self.flip(id)
 
     def has_won(self):
         if not (0 in self.id_states):
