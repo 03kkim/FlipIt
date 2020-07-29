@@ -48,6 +48,7 @@ done = False
 clock = pygame.time.Clock()
 
 
+last_highlighted = []
 
 # -------- Main Program Loop -----------
 while not done:
@@ -67,16 +68,24 @@ while not done:
             print("Click ", pos, "Grid coordinates: ", row, column)
             grid = board.return_grid()
 
+
         for square in object_grid:
             if square.collidepoint(pygame.mouse.get_pos()):
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
                 row = pos[1] // (width + margin)
-                # Set that location to one
-                board.highlight(board.coords_to_id(row, column))
-                print("Highlight ", pos, "Grid coordinates: ", row, column)
-                grid = board.return_grid()
+                currently_highlighted = [column, row]
+                if currently_highlighted != last_highlighted:
+                    last_highlighted = currently_highlighted
+                    board.unhighlight()
+                    board.highlight(board.coords_to_id(row, column))
+                    print("Highlight ", pos, "Grid coordinates: ", row, column)
+                    break
+
+                elif currently_highlighted[0] == last_highlighted[0] and currently_highlighted[1] == last_highlighted[1]:
+                    break
+
 
 
 
