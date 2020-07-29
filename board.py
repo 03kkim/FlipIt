@@ -1,12 +1,11 @@
 import random
 
-
 class Board:
-    def __init__(self, ids=[num for num in range(16)], id_states = [0 for num in range(16)], relationships=[], view_board = [0 for num in range (16)]):
-        self.ids = ids
-        self.id_states = id_states
-        self.relationships = relationships
-        self.view_board = view_board
+    is_highlighted = [num for num in range(16)]
+    ids = [num for num in range(16)]
+    id_states = [0 for num in range(16)]
+    relationships = []
+    view_board = [0 for num in range(16)]
 
 
     def front_to_back(self, list):
