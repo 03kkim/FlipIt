@@ -1,7 +1,5 @@
 import random
-# from termcolor import colored
-# import colorama
-# colorama.init()
+
 
 class Board:
     def __init__(self, ids=[num for num in range(16)], id_states = [0 for num in range(16)], relationships=[], view_board = [0 for num in range (16)]):
@@ -10,23 +8,6 @@ class Board:
         self.relationships = relationships
         self.view_board = view_board
 
-    # def pick_2_ids(self, id):
-    #     ind1 = random.randint(0, len(self.related_ids[0]) - 1)
-    #     ind2 = random.randint(0, len(self.related_ids[0]) - 1)
-    #
-    #     while (self.related_ids[0][ind1] == id or self.related_ids[1][ind2] == id):
-    #         ind1 = random.randint(0, len(self.related_ids[0]) - 1)
-    #         ind2 = random.randint(0, len(self.related_ids[0]) - 1)
-    #
-    #     # if they are the same, this runs until they aren't
-    #     while (self.related_ids[0][ind1] == self.related_ids[1][ind2]):
-    #         ind2 = random.randint(0, len(self.related_ids[0]) - 1)
-    #
-    #     picked_ids = [self.related_ids[0][ind1], self.related_ids[1][ind2]]
-    #     self.related_ids[0].remove(picked_ids[0])
-    #     self.related_ids[1].remove(picked_ids[1])
-    #
-    #     return picked_ids
 
     def front_to_back(self, list):
         list.pop(0)
@@ -80,21 +61,6 @@ class Board:
             temp_dict = {num: rand_list4[num]}
             self.relationships.append(temp_dict)
 
-
-
-    # def create_relationships(self):
-    #
-    #     relationships = []
-    #
-    #     for num in self.ids:
-    #         temp_dict = {}
-    #         # temp_dict[num] = create_relationships(num)
-    #
-    #         relationships.append(temp_dict)
-    #
-    #     self.relationships = relationships
-
-
     def group_fours(self, list):
         ls = [[], [], [], []]
         for i in range(16):
@@ -118,6 +84,7 @@ class Board:
 
     def coords_to_id(self, x, y):
         return (x + 4 * y)
+
     # flips index from 1 --> 0 or 0 --> 1
     def flip(self, id):
         if (self.id_states[id] == 0):
