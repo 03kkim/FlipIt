@@ -1,7 +1,7 @@
 import random
 
 class Board:
-    is_highlighted = [num for num in range(16)]
+    is_highlighted = [0 for num in range(16)]
     ids = [num for num in range(16)]
     id_states = [0 for num in range(16)]
     relationships = []

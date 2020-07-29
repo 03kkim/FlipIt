@@ -16,6 +16,8 @@ from board import Board
 board = Board()
 board.create_relationships()
 grid = board.return_grid()
+object_grid = []
+
 
 
 # Define some colors
@@ -24,7 +26,8 @@ WHITE = (255, 255, 255)
 GRAY = ((128,128,128))
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-
+highlight1 = RED
+highlight2 = GREEN
 # Variables for individual squares
 width = 112
 height = 112
@@ -64,6 +67,10 @@ while not done:
             print("Click ", pos, "Grid coordinates: ", row, column)
             grid = board.return_grid()
 
+        # for square in grid:
+        #     if square.get_rect().collidepoint(pygame.mouse.get_pos()):
+        #         print("mouseover")
+
 
     screen.fill(BLACK)
     # --- Game logic should go here
@@ -73,6 +80,10 @@ while not done:
             if grid[row][column] == 1:
                 color = WHITE
             pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+            if board.is_highlighted[board.coords_to_id(row, column)] == 2:
+                pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
+            if board.is_highlighted[board.coords_to_id(row, column)] == 3:
+                pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
 
     # --- Screen-clearing code goes here
 
