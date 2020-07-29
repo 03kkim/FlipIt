@@ -16,12 +16,12 @@ from board import Board
 board = Board()
 board.create_relationships()
 grid = board.return_grid()
-grid[0][0] = 1
 
 
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+GRAY = ((128,128,128))
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
@@ -53,15 +53,25 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # User clicks the mouse. Get the position
+            pos = pygame.mouse.get_pos()
+            # Change the x/y screen coordinates to grid coordinates
+            column = pos[0] // (width + margin)
+            row = pos[1] // (width + margin)
+            # Set that location to one
+            board.switch(board.coords_to_id(row, column))
+            print("Click ", pos, "Grid coordinates: ", row, column)
+            grid = board.return_grid()
+
 
     screen.fill(BLACK)
-
     # --- Game logic should go here
     for row in range(4):
         for column in range(4):
-            color = WHITE
+            color = GRAY
             if grid[row][column] == 1:
-                color = GREEN
+                color = WHITE
             pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
 
     # --- Screen-clearing code goes here

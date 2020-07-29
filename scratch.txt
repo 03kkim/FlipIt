@@ -1,6 +1,7 @@
 To-do:
-Use this - (http:
-programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation
+- Use this - (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation
+- Change the way highlight works: Make a separate table called is_highlighted so that you can highlight a square without changing its view_board state
+
 Add a main menu
 Try generalizing the board to allow changing modes and difficulty more easily
 
