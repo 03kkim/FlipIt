@@ -75,7 +75,7 @@ while not done:
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
                 row = pos[1] // (width + margin)
-                currently_highlighted = [column, row]
+                currently_highlighted = [row, column]
                 if currently_highlighted != last_highlighted:
                     last_highlighted = currently_highlighted
                     board.unhighlight()

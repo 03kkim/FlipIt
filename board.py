@@ -81,7 +81,7 @@ class Board:
         return self.group_fours(self.view_board)
 
     def coords_to_id(self, x, y):
-        return (x + 4 * y)
+        return (y + 4 * x)
 
     # flips index from 1 --> 0 or 0 --> 1
     def flip(self, id):
