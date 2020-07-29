@@ -10,6 +10,14 @@
 """
 
 import pygame
+from board import Board
+
+# Sets up board
+board = Board()
+board.create_relationships()
+grid = board.return_grid()
+grid[0][0] = 1
+
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -36,6 +44,8 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
+
+
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop
@@ -49,7 +59,10 @@ while not done:
     # --- Game logic should go here
     for row in range(4):
         for column in range(4):
-            pygame.draw.rect(screen, WHITE, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+            color = WHITE
+            if grid[row][column] == 1:
+                color = GREEN
+            pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
 
     # --- Screen-clearing code goes here
 

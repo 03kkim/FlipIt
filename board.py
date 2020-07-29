@@ -113,6 +113,10 @@ class Board:
         if (style == "line"):
             print(self.view_board)
 
+    def return_grid(self):
+        return self.group_fours(self.view_board)
+
+
     # flips index from 1 --> 0 or 0 --> 1
     def flip(self, id):
         if (self.id_states[id] == 0):
