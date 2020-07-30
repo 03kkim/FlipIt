@@ -4,7 +4,7 @@ from board import Board
 pygame.init()
 
 # Set the width and height of the screen [width, height]
-size = (498, 498)
+size = (498, 620)
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("My Game")
@@ -61,7 +61,7 @@ def game():
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
-                row = pos[1] // (width + margin)
+                row = (pos[1] - 122) // (width + margin)
                 # Set that location to one
                 board.switch(board.coords_to_id(row, column))
                 print("Click ", pos, "Grid coordinates: ", row, column)
@@ -73,7 +73,7 @@ def game():
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
-                row = pos[1] // (width + margin)
+                row = (pos[1] - 122) // (width + margin)
                 currently_highlighted = [row, column]
                 if currently_highlighted != last_highlighted:
                     last_highlighted = currently_highlighted
@@ -99,21 +99,20 @@ def game():
 
         # --- Drawing code should go here
         for row in range(4):
-
             for column in range(4):
                 color = GRAY
                 if grid[row][column] == 1:
                     color = WHITE
-                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)), width, height))
+                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + 122, width, height))
 
                 # Adds to the object grid used to detect mouseovers
                 if len(object_grid) < 16:
                     object_grid.append(rect1)
 
                 if board.is_highlighted[board.coords_to_id(row, column)] == 2:
-                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
+                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + 122), width, height), 5)
                 if board.is_highlighted[board.coords_to_id(row, column)] == 3:
-                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
+                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + 122), width, height), 5)
         # --- Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
@@ -129,16 +128,16 @@ def main_menu():
 
         screen.fill((255, 255, 255))
 
-        draw_text("FlipIt", font, (0, 0, 0), 498/2, 100)
+        draw_text("FlipIt", font, (0, 0, 0), 498/2, 150)
         mx, my = pygame.mouse.get_pos()
 
-        button_1 = pygame.Rect(124, 200, 250, 76)
-        button_2 = pygame.Rect(124, 300, 250, 76)
+        button_1 = pygame.Rect(124, 300, 250, 76)
+        button_2 = pygame.Rect(124, 400, 250, 76)
         pygame.draw.rect(screen, (128, 128, 128), button_1, border_radius=15)
         pygame.draw.rect(screen, (128, 128, 128), button_2, border_radius=15)
 
-        draw_text("Play Game", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 100), 498/2, 236)
-        draw_text("Options", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 255), 498 / 2, 334)
+        draw_text("Play Game", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 100), 498/2, 336)
+        draw_text("Options", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 255), 498 / 2, 434)
 
         if button_1.collidepoint((mx, my)):
             if click:
