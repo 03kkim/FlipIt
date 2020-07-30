@@ -48,10 +48,7 @@ class Board:
         rand_list4 = []
         while (len(rand_list4) < 16):
             rand_id = random.randint(0, len(rand_list3) - 1)
-            # What was the intention behind this?
-            # Try fixing the problem by basing the key (which is imaginary at this point) off of the length of rand_list4 at that point
-            while not (rand_list3[rand_id] in rand_list3):
-                print(rand_id)
+            while (len(rand_list4) in rand_list3[rand_id]):
                 rand_id = random.randint(0, len(rand_list3) - 1)
                 if (len(id_list) == 1):
                     rand_id = rand_list3[0]
