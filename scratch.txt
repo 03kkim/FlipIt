@@ -1,8 +1,19 @@
 To-do:
 - Use this - (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation board state
+- Add a timer, move counter, and back button to the game
+- Work on options menu which will allow for more dynamic difficulties
+    * Things to add:
+        1. Change board size
+        2. Change relationship ratios
+        3. Change board beginning state
+        4. Change board end state
+- Add a win screen
+- Add a high scores page
+    *Lowest number of moves
+    *Lowest time
+- Make randomization work differently
+    *Implement a seed system so you can more easily go back, or so that you can play the same board as somebody else
 
-Add a main menu
-Try generalizing the board to allow changing modes and difficulty more easily
 
 
 
