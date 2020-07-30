@@ -1,6 +1,6 @@
 To-do:
 - Use this - (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation board state
-- Board generation needs to be fixed: ID should not equal either of the two numbers (this causes an overlap)
+
 Add a main menu
 Try generalizing the board to allow changing modes and difficulty more easily
 

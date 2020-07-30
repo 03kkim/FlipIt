@@ -70,28 +70,42 @@ while not done:
             grid = board.return_grid()
 
 
-        for square in object_grid:
-            if square.collidepoint(pygame.mouse.get_pos()):
-                pos = pygame.mouse.get_pos()
-                # Change the x/y screen coordinates to grid coordinates
-                column = pos[0] // (width + margin)
-                row = pos[1] // (width + margin)
-                currently_highlighted = [row, column]
-                if currently_highlighted != last_highlighted:
-                    last_highlighted = currently_highlighted
-                    board.unhighlight()
-                    board.highlight(board.coords_to_id(row, column))
-                    print("Highlight ", pos, "Grid coordinates: ", row, column)
-                    break
-
-                elif currently_highlighted[0] == last_highlighted[0] and currently_highlighted[1] == last_highlighted[1]:
-                    break
 
 
 
 
-    screen.fill(BLACK)
+
     # --- Game logic should go here
+    for square in object_grid:
+        if square.collidepoint(pygame.mouse.get_pos()):
+            pos = pygame.mouse.get_pos()
+            # Change the x/y screen coordinates to grid coordinates
+            column = pos[0] // (width + margin)
+            row = pos[1] // (width + margin)
+            currently_highlighted = [row, column]
+            if currently_highlighted != last_highlighted:
+                last_highlighted = currently_highlighted
+                board.unhighlight()
+                board.highlight(board.coords_to_id(row, column))
+                print("Highlight ", pos, "Grid coordinates: ", row, column)
+                break
+
+            elif currently_highlighted[0] == last_highlighted[0] and currently_highlighted[1] == last_highlighted[1]:
+                break
+    if (board.has_won() == True):
+        print("Congratulations!")
+        done = True
+
+
+                # --- Screen-clearing code goes here
+    screen.fill(BLACK)
+
+
+    # If you want a background image, replace this clear with blit'ing the
+    # background image.
+
+
+    # --- Drawing code should go here
     for row in range(4):
 
         for column in range(4):
@@ -108,18 +122,6 @@ while not done:
                 pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
             if board.is_highlighted[board.coords_to_id(row, column)] == 3:
                 pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height)), width, height), 5)
-
-    # --- Screen-clearing code goes here
-
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
-
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
-
-
-    # --- Drawing code should go here
-
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
 
@@ -128,14 +130,6 @@ while not done:
 
 # Close the window and quit.
 pygame.quit()
-
-
-
-
-
-
-
-
 
 
 
