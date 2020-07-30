@@ -134,8 +134,8 @@ def main_menu():
 
         button_1 = pygame.Rect(124, 200, 250, 76)
         button_2 = pygame.Rect(124, 300, 250, 76)
-        pygame.draw.rect(screen, (128, 128, 128), button_1)
-        pygame.draw.rect(screen, (128, 128, 128), button_2)
+        pygame.draw.rect(screen, (128, 128, 128), button_1, border_radius=15)
+        pygame.draw.rect(screen, (128, 128, 128), button_2, border_radius=15)
 
         draw_text("Play Game", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 100), 498/2, 236)
         draw_text("Options", pygame.font.SysFont("Helvetica Neue", 40), (150, 255, 255), 498 / 2, 334)
