@@ -4,6 +4,7 @@ from board import Board
 pygame.init()
 
 # Set the width and height of the screen [width, height]
+global size
 size = (498, 620)
 screen = pygame.display.set_mode(size)
 
@@ -47,8 +48,18 @@ def game():
     height = 112
     margin = 10
 
+    offset = size[1] - 498
+
+    # Used in loop
     done = False
     last_highlighted = []
+
+    # Stopwatch Setup
+    minutes = 0
+    seconds = 0
+    frames = 0
+    oldsecond = 0
+
     # -------- Main Program Loop -----------
     while not done:
         # --- Main event loop
@@ -61,11 +72,12 @@ def game():
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
-                row = (pos[1] - 122) // (width + margin)
+                row = (pos[1] - offset) // (width + margin)
                 # Set that location to one
                 board.switch(board.coords_to_id(row, column))
                 print("Click ", pos, "Grid coordinates: ", row, column)
                 grid = board.return_grid()
+
 
         # --- Game logic should go here
         for square in object_grid:
@@ -73,7 +85,7 @@ def game():
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
-                row = (pos[1] - 122) // (width + margin)
+                row = (pos[1] - offset) // (width + margin)
                 currently_highlighted = [row, column]
                 if currently_highlighted != last_highlighted:
                     last_highlighted = currently_highlighted
@@ -98,23 +110,35 @@ def game():
 
 
         # --- Drawing code should go here
+        pygame.draw.rect(screen, GRAY, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), border_radius=10)
         for row in range(4):
             for column in range(4):
                 color = GRAY
                 if grid[row][column] == 1:
                     color = WHITE
-                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + 122, width, height))
+                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + offset, width, height))
 
                 # Adds to the object grid used to detect mouseovers
                 if len(object_grid) < 16:
                     object_grid.append(rect1)
 
                 if board.is_highlighted[board.coords_to_id(row, column)] == 2:
-                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + 122), width, height), 5)
+                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5)
                 if board.is_highlighted[board.coords_to_id(row, column)] == 3:
-                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + 122), width, height), 5)
+                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5)
         # --- Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
+
+        #Stopwatch functionality
+        if (frames == 59):
+            frames = 0
+            if (seconds == 59):
+                seconds = 0
+                minutes += 1
+            else:
+                seconds += 1
+        else:
+            frames += 1
 
         # --- Limit to 60 frames per second
         clock.tick(60)
