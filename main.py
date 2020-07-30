@@ -43,6 +43,13 @@ def game():
     highlight1 = RED
     highlight2 = GREEN
 
+    # c1 is background, c2 is border color, c3 is text background (also off state), c4 is on state, c5 is text color
+    c1 = 0
+    c2 = 0
+    c3 = 0
+    c4 = 0
+    c5 = 0
+
     # Variables for individual squares
     width = 112
     height = 112
@@ -58,10 +65,17 @@ def game():
     minutes = 0
     seconds = 0
     frames = 0
-    oldsecond = 0
+
 
     # -------- Main Program Loop -----------
     while not done:
+        # Set up the stopwatch
+        if (minutes < 10):
+            if (seconds < 10):
+                stopwatch = str(minutes) + ":" + "0" + str(seconds)
+            else:
+                stopwatch = str(minutes) + ":" + str(seconds)
+
         # --- Main event loop
 
         for event in pygame.event.get():
@@ -101,8 +115,9 @@ def game():
             done = True
 
 
-                    # --- Screen-clearing code goes here
-        screen.fill(BLACK)
+        # --- Screen-clearing code goes here
+        screen.fill(c1)
+
 
 
         # If you want a background image, replace this clear with blit'ing the
@@ -110,22 +125,27 @@ def game():
 
 
         # --- Drawing code should go here
-        pygame.draw.rect(screen, GRAY, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), border_radius=10)
+        pygame.draw.rect(screen, c3, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), border_radius=10)
+        pygame.draw.rect(screen, c2, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), 3, border_radius=10)
+        draw_text(stopwatch, font, c5, 371, 64)
+
+
         for row in range(4):
             for column in range(4):
-                color = GRAY
+                color = c3
                 if grid[row][column] == 1:
-                    color = WHITE
-                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + offset, width, height))
+                    color = c4
+                rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + offset, width, height), border_radius=5)
+                pygame.draw.rect(screen, c2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 3, border_radius=5)
 
                 # Adds to the object grid used to detect mouseovers
                 if len(object_grid) < 16:
                     object_grid.append(rect1)
 
                 if board.is_highlighted[board.coords_to_id(row, column)] == 2:
-                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5)
+                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5, border_radius=5)
                 if board.is_highlighted[board.coords_to_id(row, column)] == 3:
-                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5)
+                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5, border_radius=5)
         # --- Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 

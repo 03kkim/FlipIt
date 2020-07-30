@@ -13,7 +13,9 @@ To-do:
     *Lowest time
 - Make randomization work differently
     *Implement a seed system so you can more easily go back, or so that you can play the same board as somebody else
-
+- Make colors customizable
+- https://visme.co/blog/website-color-schemes/
+- Change font to be more appealing
 
 
 
