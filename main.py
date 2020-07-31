@@ -90,7 +90,11 @@ def game():
                 # Change the x/y screen coordinates to grid coordinates
                 column = pos[0] // (width + margin)
                 row = (pos[1] - offset) // (width + margin)
-                # Set that location to one
+                real_row = (pos[1]) // (width + margin)
+                if (real_row == 0 and column == 0):
+                    done = True
+                    main_menu()
+
                 board.switch(board.coords_to_id(row, column))
                 turn += 1
                 print("Click ", pos, "Grid coordinates: ", row, column)
@@ -121,16 +125,21 @@ def game():
 
         # --- Screen-clearing code goes here
         screen.fill(c1)
-        background = pygame.Surface((width, height))
-        back_arrow = pygame.image.load("./sprites/back_arrow.svg")
-        arrow_rect = back_arrow.get_rect()
+
 
         # If you want a background image, replace this clear with blit'ing the
         # background image.
 
 
         # --- Drawing code should go here
-        screen.blit(back_arrow, arrow_rect)
+        pygame.draw.rect(screen, c3, (10, 10, width, height), border_radius=10)
+        pygame.draw.rect(screen, c2, (10, 10, width, height), 5, border_radius=10)
+
+        back_arrow = pygame.image.load("./sprites/back_arrow.svg")
+        arrow_rect = back_arrow.get_rect()
+        screen.blit(back_arrow, (22, 22), arrow_rect)
+
+
         turn_font = pygame.font.SysFont("Montserrat", 80)
         if (turn>=10):
             turn_font = pygame.font.SysFont("Montserrat", 70)
