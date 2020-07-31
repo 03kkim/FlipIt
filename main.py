@@ -8,7 +8,7 @@ global size
 size = (498, 620)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("FlipIt")
 
 # Used for Text Display
 font = pygame.font.SysFont("Montserrat", 100)
