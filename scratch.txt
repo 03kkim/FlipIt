@@ -1,13 +1,11 @@
 To-do:
-- Use this - (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation board state
-- Fix bug where board generation crashes the game (Look through board generation code)
+- Fix bug where board generation crashes the game (Look through board generation code) <--- Turns out it's pygame being run through IDE (At least I think it is)
 - Work on options menu which will allow for more dynamic difficulties
     * Things to add:
         1. Change board size
         2. Change relationship ratios
         3. Change board beginning state
         4. Change board end state
-- Add a win screen
 - Add a high scores page
     *Lowest number of moves
     *Lowest time
@@ -15,9 +13,8 @@ To-do:
     *Implement a seed system so you can more easily go back, or so that you can play the same board as somebody else
 - Make colors customizable
 - https://visme.co/blog/website-color-schemes/
-- Change font to be more appealing
 
-
+(http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids)
 
 Notes:
 
