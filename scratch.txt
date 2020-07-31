@@ -14,6 +14,7 @@ To-do:
 - https://visme.co/blog/website-color-schemes/
 - Fix the back button (hitbox is slightly off)
 - Fix bug where board generation crashes the game (Look through board generation code) <--- Turns out it's pygame being run through IDE (At least I think it is)
+- Make things rectangles so that they are easier to draw on and stuff
 
 (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids)
 

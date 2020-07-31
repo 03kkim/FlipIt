@@ -25,24 +25,38 @@ def draw_text(text, font, color, x, y, surface=screen):
 clock = pygame.time.Clock()
 
 def main_menu():
+    c1 = pygame.Color("#45A29E")
+    c2 = pygame.Color("#66FCF1")
+    c3 = pygame.Color("#C5C6C7")
+    c4 = (255, 255, 255)
+    c5 = pygame.Color("#0B0C10")
     click = False
     while True:
 
-        screen.fill((255, 255, 255))
+        screen.fill(c1)
 
         draw_text("FlipIt", font, (0, 0, 0), 498/2, 150)
         mx, my = pygame.mouse.get_pos()
 
         button_1 = pygame.Rect(124, 300, 250, 76)
         button_2 = pygame.Rect(124, 400, 250, 76)
-        pygame.draw.rect(screen, (128, 128, 128), button_1, border_radius=15)
-        pygame.draw.rect(screen, (128, 128, 128), button_2, border_radius=15)
+
+        pygame.draw.rect(screen, c3, button_1, border_radius=15)
+        pygame.draw.rect(screen, c2, button_1, 5, border_radius=15)
+
+        pygame.draw.rect(screen, c3, button_2, border_radius=15)
+        pygame.draw.rect(screen, c2, button_2, 5, border_radius=15)
 
         # Was "Helvetica Neue
-        draw_text("Play Game", pygame.font.SysFont("Montserrat", 40), (150, 255, 100), 498/2, 336)
-        draw_text("Options", pygame.font.SysFont("Montserrat", 40), (150, 255, 255), 498 / 2, 434)
+        draw_text("Play Game", pygame.font.SysFont("Montserrat", 40), c5, 498/2, 336)
+        draw_text("Options", pygame.font.SysFont("Montserrat", 40), c5, 498 / 2, 434)
 
         if button_1.collidepoint((mx, my)):
+
+            # Makes Play button white on mouseover
+            pygame.draw.rect(screen, c3, button_1, border_radius=15)
+            pygame.draw.rect(screen, c4, button_1, 5, border_radius=15)
+            draw_text("Play Game", pygame.font.SysFont("Montserrat", 40), c5, 498 / 2, 336)
             if click:
                 game()
         # if button_2.collidepoint((mx, my)):
