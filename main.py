@@ -214,8 +214,7 @@ def game():
                         pygame.draw.rect(screen, highlight1, (margin + column * (margin + width) - 5, (margin + row * (margin + height) + offset) - 5, width + 10, height + 10), 5, border_radius=10)
                     if board.is_highlighted[board.coords_to_id(row, column)] == 3:
                         pygame.draw.rect(screen, highlight2, (margin + column * (margin + width) - 5, (margin + row * (margin + height) + offset) - 5, width + 10, height + 10), 5, border_radius=10)
-            # --- Go ahead and update the screen with what we've drawn.
-            pygame.display.flip()
+
 
             #Stopwatch functionality
             if (frames == 59):
@@ -228,27 +227,60 @@ def game():
             else:
                 frames += 1
 
+        # Win Page
         elif (board.has_won() == True):
-            screen.fill(c1)
+            # Stopwatch
             if (minutes < 10):
                 if (seconds < 10):
                     stopwatch = str(minutes) + ":" + "0" + str(seconds)
                 else:
                     stopwatch = str(minutes) + ":" + str(seconds)
+            # --- Main event loop
 
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    # User clicks the mouse. Get the position
+                    pos = pygame.mouse.get_pos()
+                    print(pos)
+                    if (pos[0] >= 127 and pos[0] <= 239) and (pos[1] >= 400 and pos[1] <= 512):
+                        done = True
+                        main_menu()
+                    elif (pos[0] >= 259 and pos[0] <= 371) and (pos[1] >= 400 and pos[1] <= 512):
+                        board.clear_board()
+                        turn = 0
+                        minutes = 0
+                        seconds = 0
+                        frames = 0
 
-            pygame.draw.rect(screen, c3, (10, 10, width, height), border_radius=10)
-            pygame.draw.rect(screen, c2, (10, 10, width, height), 5, border_radius=10)
+            screen.fill(c1)
 
+            back_box_x = 249 - 112 - 10
+            back_box_y = 400
+            retry_box_x = 249 + 10
+            retry_box_y = 400
+
+            pygame.draw.rect(screen, c3, (back_box_x, back_box_y, width, height), border_radius=10)
+            pygame.draw.rect(screen, c2, (back_box_x, back_box_y, width, height), 5, border_radius=10)
             back_arrow = pygame.image.load("./sprites/back_arrow.svg")
-            arrow_rect = back_arrow.get_rect()
-            screen.blit(back_arrow, (22, 22), arrow_rect)
+            back_rect = back_arrow.get_rect()
+            screen.blit(back_arrow, (back_box_x + 12, back_box_y + 12), back_rect)
 
-            turn_font = pygame.font.SysFont("Montserrat", 80)
-            draw_text(str(turn), turn_font, c5, 188, 64)
+            pygame.draw.rect(screen, c3, (retry_box_x, retry_box_y, width, height), border_radius=10)
+            pygame.draw.rect(screen, c2, (retry_box_x, retry_box_y, width, height), 5, border_radius=10)
+            retry_arrow = pygame.image.load("./sprites/retry.svg")
+            retry_rect = retry_arrow.get_rect()
+            screen.blit(retry_arrow, (retry_box_x + 12, retry_box_y + 12), retry_rect)
 
-            time_font = pygame.font.SysFont("Montserrat", 80)
-            draw_text(stopwatch, time_font, c5, 371, 64)
+            win_font = pygame.font.SysFont("Montserrat", 50)
+            draw_text("Congratulations!", win_font, c5, 249, 100)
+            draw_text("Turns: " + str(turn), win_font, c5, 249, 225)
+            draw_text("Time: " + stopwatch, win_font, c5, 249, 300)
+
+
+        # --- Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
         # --- Limit to 60 frames per second
         clock.tick(60)
 
