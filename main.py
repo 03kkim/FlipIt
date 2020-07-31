@@ -121,14 +121,16 @@ def game():
 
         # --- Screen-clearing code goes here
         screen.fill(c1)
-
-
+        background = pygame.Surface((width, height))
+        back_arrow = pygame.image.load("./sprites/back_arrow.svg")
+        arrow_rect = back_arrow.get_rect()
 
         # If you want a background image, replace this clear with blit'ing the
         # background image.
 
 
         # --- Drawing code should go here
+        screen.blit(back_arrow, arrow_rect)
         turn_font = pygame.font.SysFont("Montserrat", 80)
         if (turn>=10):
             turn_font = pygame.font.SysFont("Montserrat", 70)
