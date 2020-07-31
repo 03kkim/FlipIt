@@ -66,6 +66,9 @@ def game():
     seconds = 0
     frames = 0
 
+    # Turn Counter
+    turn = 0
+
 
     # -------- Main Program Loop -----------
     while not done:
@@ -89,6 +92,7 @@ def game():
                 row = (pos[1] - offset) // (width + margin)
                 # Set that location to one
                 board.switch(board.coords_to_id(row, column))
+                turn += 1
                 print("Click ", pos, "Grid coordinates: ", row, column)
                 grid = board.return_grid()
 
@@ -125,9 +129,21 @@ def game():
 
 
         # --- Drawing code should go here
+        turn_font = pygame.font.SysFont("Montserrat", 80)
+        if (turn>=10):
+            turn_font = pygame.font.SysFont("Montserrat", 70)
+        if (turn >= 100):
+            turn_font = pygame.font.SysFont("Montserrat", 50)
+        pygame.draw.rect(screen, c3, (10 + 10 + 112, 10, width, height), border_radius=10)
+        pygame.draw.rect(screen, c2, (10 + 10 + 112, 10, width, height), 5, border_radius=10)
+        draw_text(str(turn), turn_font, c5, 188, 64)
+
+        time_font = pygame.font.SysFont("Montserrat", 80)
+        if (minutes >= 10):
+            time_font = pygame.font.SysFont("Montserrat", 50)
         pygame.draw.rect(screen, c3, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), border_radius=10)
         pygame.draw.rect(screen, c2, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), 5, border_radius=10)
-        draw_text(stopwatch, font, c5, 371, 64)
+        draw_text(stopwatch, time_font, c5, 371, 64)
 
 
         for row in range(4):
