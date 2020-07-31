@@ -87,6 +87,8 @@ def game():
     print(board.relationships)
     grid = board.return_grid()
     object_grid = []
+    for num in range(16):
+        board.flip(num)
 
     # Define some colors
     BLACK = (0, 0, 0)
@@ -261,12 +263,12 @@ def game():
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     # User clicks the mouse. Get the position
                     pos = pygame.mouse.get_pos()
-                    print(pos)
                     if (pos[0] >= 127 and pos[0] <= 239) and (pos[1] >= 400 and pos[1] <= 512):
                         done = True
                         main_menu()
                     elif (pos[0] >= 259 and pos[0] <= 371) and (pos[1] >= 400 and pos[1] <= 512):
                         board.clear_board()
+                        board.is_clear = True
                         turn = 0
                         minutes = 0
                         seconds = 0
