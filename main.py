@@ -87,8 +87,6 @@ def game():
     print(board.relationships)
     grid = board.return_grid()
     object_grid = []
-    for num in range(16):
-        board.flip(num)
 
     # Define some colors
     BLACK = (0, 0, 0)
@@ -147,7 +145,7 @@ def game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONUP:
                     # User clicks the mouse. Get the position
                     pos = pygame.mouse.get_pos()
                     # Change the x/y screen coordinates to grid coordinates
@@ -260,7 +258,7 @@ def game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONUP:
                     # User clicks the mouse. Get the position
                     pos = pygame.mouse.get_pos()
                     if (pos[0] >= 127 and pos[0] <= 239) and (pos[1] >= 400 and pos[1] <= 512):
@@ -282,13 +280,13 @@ def game():
             retry_box_y = 400
 
             pygame.draw.rect(screen, c3, (back_box_x, back_box_y, width, height), border_radius=10)
-            pygame.draw.rect(screen, c2, (back_box_x, back_box_y, width, height), 5, border_radius=10)
+            border1 = pygame.draw.rect(screen, c2, (back_box_x, back_box_y, width, height), 5, border_radius=10)
             back_arrow = pygame.image.load("./sprites/back_arrow.svg")
             back_rect = back_arrow.get_rect()
             screen.blit(back_arrow, (back_box_x + 12, back_box_y + 12), back_rect)
 
             pygame.draw.rect(screen, c3, (retry_box_x, retry_box_y, width, height), border_radius=10)
-            pygame.draw.rect(screen, c2, (retry_box_x, retry_box_y, width, height), 5, border_radius=10)
+            border2 = pygame.draw.rect(screen, c2, (retry_box_x, retry_box_y, width, height), 5, border_radius=10)
             retry_arrow = pygame.image.load("./sprites/retry.svg")
             retry_rect = retry_arrow.get_rect()
             screen.blit(retry_arrow, (retry_box_x + 12, retry_box_y + 12), retry_rect)
@@ -298,6 +296,11 @@ def game():
             draw_text("Turns: " + str(turn), win_font, c5, 249, 225)
             draw_text("Time: " + stopwatch, win_font, c5, 249, 300)
 
+            # Highlights borders of the square on mouseover
+            if border1.collidepoint(pygame.mouse.get_pos()):
+                pygame.draw.rect(screen, c4, (back_box_x, back_box_y, width, height), 5, border_radius=10)
+            if border2.collidepoint(pygame.mouse.get_pos()):
+                pygame.draw.rect(screen, c4, (retry_box_x, retry_box_y, width, height), 5, border_radius=10)
 
         # --- Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
