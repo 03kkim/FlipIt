@@ -126,6 +126,12 @@ def game():
 
     # -------- Main Program Loop -----------
     while not done:
+        if (board.is_clear == True):
+            # Sets up board
+            board.create_relationships()
+            print(board.relationships)
+            object_grid = []
+
         if (board.has_won() == False):
         # Set up the stopwatch
             if (minutes < 10):

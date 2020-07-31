@@ -6,6 +6,7 @@ class Board:
     id_states = [0 for num in range(16)]
     relationships = []
     view_board = [0 for num in range(16)]
+    is_clear = True
 
     def front_to_back(self, list):
         list.pop(0)
@@ -60,6 +61,7 @@ class Board:
         for num in self.ids:
             temp_dict = {num: rand_list4[num]}
             self.relationships.append(temp_dict)
+        self.is_clear = False
 
     def group_fours(self, list):
         ls = [[], [], [], []]
@@ -125,9 +127,12 @@ class Board:
             return False
 
     def clear_board(self):
+        self.is_highlighted = [0 for num in range(16)]
+        self.ids = [num for num in range(16)]
         self.id_states = [0 for num in range(16)]
-        self.view_board = self.id_states
-
+        self.relationships = []
+        self.view_board = [0 for num in range(16)]
+        self.is_clear = False
 
 
 
