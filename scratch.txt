@@ -1,6 +1,6 @@
 To-do:
 - Use this - (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids) - to build a board UI based on the generation board state
-- Add a timer, move counter, and back button to the game
+- Fix bug where board generation crashes the game (Look through board generation code)
 - Work on options menu which will allow for more dynamic difficulties
     * Things to add:
         1. Change board size
