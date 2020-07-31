@@ -1,5 +1,4 @@
 To-do:
-- Fix bug where board generation crashes the game (Look through board generation code) <--- Turns out it's pygame being run through IDE (At least I think it is)
 - Work on options menu which will allow for more dynamic difficulties
     * Things to add:
         1. Change board size
@@ -14,6 +13,7 @@ To-do:
 - Make colors customizable
 - https://visme.co/blog/website-color-schemes/
 - Fix the back button (hitbox is slightly off)
+- Fix bug where board generation crashes the game (Look through board generation code) <--- Turns out it's pygame being run through IDE (At least I think it is)
 
 (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids)
 
