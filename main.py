@@ -11,7 +11,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("My Game")
 
 # Used for Text Display
-font = pygame.font.SysFont("Helvetica Neue", 100)
+font = pygame.font.SysFont("Montserrat", 100)
 
 # x, y is the center of the text
 def draw_text(text, font, color, x, y, surface=screen):
@@ -44,11 +44,11 @@ def game():
     highlight2 = GREEN
 
     # c1 is background, c2 is border color, c3 is text background (also off state), c4 is on state, c5 is text color
-    c1 = 0
-    c2 = 0
-    c3 = 0
-    c4 = 0
-    c5 = 0
+    c1 = pygame.Color("#45A29E")
+    c2 = pygame.Color("#66FCF1")
+    c3 = pygame.Color("#C5C6C7")
+    c4 = WHITE
+    c5 = pygame.Color("#0B0C10")
 
     # Variables for individual squares
     width = 112
@@ -126,7 +126,7 @@ def game():
 
         # --- Drawing code should go here
         pygame.draw.rect(screen, c3, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), border_radius=10)
-        pygame.draw.rect(screen, c2, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), 3, border_radius=10)
+        pygame.draw.rect(screen, c2, (10 + 2 * (10 + 112), 10, width * 2 + 10, height), 5, border_radius=10)
         draw_text(stopwatch, font, c5, 371, 64)
 
 
@@ -136,16 +136,16 @@ def game():
                 if grid[row][column] == 1:
                     color = c4
                 rect1 = pygame.draw.rect(screen, color, (margin + column * (margin + width), (margin + row * (margin + height)) + offset, width, height), border_radius=5)
-                pygame.draw.rect(screen, c2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 3, border_radius=5)
+                pygame.draw.rect(screen, c2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5, border_radius=5)
 
                 # Adds to the object grid used to detect mouseovers
                 if len(object_grid) < 16:
                     object_grid.append(rect1)
 
                 if board.is_highlighted[board.coords_to_id(row, column)] == 2:
-                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5, border_radius=5)
+                    pygame.draw.rect(screen, highlight1, (margin + column * (margin + width) - 5, (margin + row * (margin + height) + offset) - 5, width + 10, height + 10), 5, border_radius=10)
                 if board.is_highlighted[board.coords_to_id(row, column)] == 3:
-                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width), (margin + row * (margin + height) + offset), width, height), 5, border_radius=5)
+                    pygame.draw.rect(screen, highlight2, (margin + column * (margin + width) - 5, (margin + row * (margin + height) + offset) - 5, width + 10, height + 10), 5, border_radius=10)
         # --- Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
