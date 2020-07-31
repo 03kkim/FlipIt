@@ -73,8 +73,6 @@ def game():
     print(board.relationships)
     grid = board.return_grid()
     object_grid = []
-    for x in range(16):
-        board.flip(x)
 
     # Define some colors
     BLACK = (0, 0, 0)

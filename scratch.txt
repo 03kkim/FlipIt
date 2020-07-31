@@ -13,6 +13,7 @@ To-do:
     *Implement a seed system so you can more easily go back, or so that you can play the same board as somebody else
 - Make colors customizable
 - https://visme.co/blog/website-color-schemes/
+- Fix the back button (hitbox is slightly off)
 
 (http:programarcadegames.com/index.php?lang=en&chapter=array_backed_grids)
 
